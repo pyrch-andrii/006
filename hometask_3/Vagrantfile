@@ -1,0 +1,32 @@
+Vagrant.configure("2") do |config|
+
+# Virtual Settings Machine 1
+config.vm.define "hw3_64" do |vm1| 
+ vm1.vm.box = "ubuntu/bionic64"
+ vm1.vm.box_check_update = false
+ vm1.vm.network "forwarded_port", guest: 8090, host: 8080
+
+
+# Provider Settings Machine 1
+config.vm.provider "virtualbox" do |vb|
+ vb.name = "hw3_bionic64"
+ vb.gui = false
+ vb.memory = "4096"
+end
+
+
+# Provision Settings Machine 1
+ vm1.vm.provision "shell", inline: <<-SHELL
+ apt-get update
+ apt-get install -y apache2
+ SHELL
+
+ vm1.vm.provision "shell", run: "always", inline: <<-SHELL
+
+ SHELL
+end
+
+ 
+end
+
+
